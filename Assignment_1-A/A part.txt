@@ -1,0 +1,64 @@
+A part
+
+A-1.c
+
+1. In gimple first all the variable are declared each on new line and then after declaring all variable assignment is done each on new line.The multiple value declared on same line get positioned to new line.Global declaration doesn't seems to be anywhere declared, they are directly being used.
+
+2.The complex(i.e. having more than one operator) expression are broken down with precedence as In given example multiplication has higher precedence than addition so first multiplication value is stored in temporary variable and later it get added.temprory variables are introduced when there is complex expression that need to be broken to find final output.
+
+3.floats and doubles are expressed in scientific notation.
+
+4.Reading/writing  from/to global  variables  requires  a memory  load or  store operation.  As  GIMPLE  statements can  have  at most  one operation, the only type of  statements involving globals are of the
+form "GLOBAL  = LOCAL" or  "LOCAL =  GLOBAL". This is  because while local variables  of a  procedure can  reside entirely  in registers every read/write  to global variables  must refer to main  memory  as they can be accessed by  other entities (threads, I/O devices, etc).
+Hence,  any operation  on global  variables (such  as the  increment shown  in this  example)  has  to go  through  an  indirection of  a temporary version of the global  inside registers (as this temporary value is  not visible to  I/O devices, etc). Global  temporaries are named similar to the global variable but with a numeric suffix.
+
+A-2.c
+
+1.If block is processed conditionally or unconditionally(with the use of if statement or without using if statement) continued with goto(eg in given sample if (a<=9 then goto <D.1710>.
+
+2.
+
+A-3.c
+
+1.Basic Blocks 2,3 and 4 corresponds to while loop.The only difference between simple if else and while loop in gimple is in while loop it jumps to the previous block that has been executed.
+
+2.A  for-loop  is  nothing  but  a  while-loop  with  the  initializer separated out  into an  initial basic  block, the  body of  the loop subsequently, the  increment part at the  end of the loop  body, and  the conditional jump back to the start of the loop. Blocks 5,6,7,8,9,10 corresponds to for loop.
+
+A-4.c
+
+1.Just like scalar initialisation, it is also declared each statement on new line.In arrays first initialisation is split into different line,then assign values to individual array.
+
+2.In gimple one operation is done at one time, therefore a temporary variable is used to set them to equal and are written in two steps.
+
+3.CLOBBER statements are used for  address-escaped variables. It is an annotation  to  signify  that  the  scope  of  this  address-escaped variable has ended.
+
+A-5.c
+
+1.Yes,the suffix D is used in if statement.
+Variables that are  likely to be used  before any assignment are suffixed  with `(D)' to indicate  that the assignment was implicit in the declaration. 
+
+2.PHI merges the values and execute which satisfies the condition.eg in given problem  a_1 = PHI <a_5(3), a_7(4)>
+If control reached here from block 3 then a_5 value will be considered else a_7.
+
+3.Switch.
+
+A_6.c
+
+1.#include <stdio.h>
+
+void main()
+{
+    int i, j;
+    for(i = 2; i <= 100; i++) {
+        for(j = 2; j < i; j++) {
+            if(i % j == 0)
+                break;
+        }
+        if(i == j) {
+            printf("%d \n", i);
+        }
+   }           
+}
+The output is a list of prime numbers up to 100.
+
+
