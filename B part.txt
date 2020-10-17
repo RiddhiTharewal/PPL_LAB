@@ -1,0 +1,22 @@
+B1.c
+
+1.It exist because it may be called from another file.compiler cannot know it before link time.
+
+2.If the function was declared with the "static" keyword  then  the function body will disappear if there is no caller within the file.
+
+B3.c
+
+1.a take the value from 0-99.
+As a is never less than 4 if condition is not processed and therefore it get eliminated by compiler.
+
+B4.c
+
+1.The original code has 2 computation but in fre pass it uses the temporary variable which stores result of initial computation.(i.e. a+c). Therefore one line execution.
+
+2.Check  the   file  B-4.c.*.optimized.   This  is  the   last  GIMPLE  intra-procedural pass. If  it is same as the output  of FRE, then no more optimizations have occured.
+
+3   "return  b" was  required to  make the  computation of  variable `b' meaningful. If function  `main' is going to "return 0"  and there is  no other  output, GCC  will realise that  the entire  computation of variable `b' was  dead code and will eliminate  its dependencies one by one until the resulting program reduces to:
+
+       
+             
+               
